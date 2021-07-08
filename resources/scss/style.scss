@@ -1,0 +1,308 @@
+
+$theme-colors: (
+  "primary": #eb194b,
+);
+
+@import "~bootstrap/scss/bootstrap";
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
+.header-top-bar {
+  height: 5px;
+  background-color: #eb194b;
+}
+
+a:hover {
+  color: #eb194b!important;
+}
+
+.btn-login {
+  text-align: right;
+}
+
+//############## DASHBOARD ##############
+.hello-user {
+  color: #eb194b;
+}
+
+.dash-topbar-menu {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.card {
+  position: relative;
+  top:30px;
+}
+
+.card-header {
+  display:flex;
+  justify-content:space-between;
+  font-size:17px;
+}
+
+.welcome-user {
+  text-decoration: none!important;
+  font-weight:bold;
+}
+
+.card-body {
+  padding-top: 40px;
+}
+.box-content-card {
+  display: flex;
+  justify-content:center;
+  font-size:16px;
+  font-weight:600;
+  color:rgba(1,1,1,.7);
+}
+
+.card-content-inner {
+  display: flex;
+  justify-content:center;
+}
+
+.dash-card-link {
+  width:80%;
+  text-decoration:none!important;
+}
+
+.dash-card-link:hover {
+    transition: 0.2s opacity;
+    opacity: 0.6;
+}
+
+.card-link-title {
+  background-color: rgba(1,1,1,.02);
+  width:100%;
+  height:100%;
+  border-radius:10px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.1),0 3px 10px 0 rgba(133, 101, 101, 0.1);
+}
+
+.area-link {
+  width: 100%;
+}
+
+.area-link > h3 {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.page-icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.page-icon > i {
+  color: orange;
+  font-size: 32px;
+  padding-top: 10px;
+}
+
+// Client-Create
+.box-form {
+  display: flex;
+  justify-content:center;
+  font-size:16px;
+  font-weight:600;
+  color:rgba(1,1,1,.7);
+}
+
+.input-form-client, .input-form-user {
+  font-size:16px;
+  font-weight:600;
+  color:rgba(1,1,1,.5);
+}
+
+#btn-create-client, #btn-create-user, #btn-create-property, #btn-create-sale, #btn-update-property {
+  width: 50%!important;
+  border-radius:25px;
+  font-size:16px;
+  font-weight:bold;
+}
+
+#client-form-delete, #user-form-delete {
+  float:right;
+}
+
+.delete-client, .delete-user {
+  cursor: pointer;
+  border:none;
+  background-color:transparent;
+}
+
+.client-delete-icon, .user-delete-icon, .show-property {
+  color: #dc3545;
+  font-size:20px;
+  margin-top:10px
+}
+
+.opacity-btn {
+  transition: 0.2s opacity;
+}
+
+.opacity-btn:hover {
+  opacity: 0.8;
+}
+
+.user-table > td, .client-table > td, .property-table > td, .sale-table > td {
+  text-align: center!important;
+  vertical-align: middle;
+}
+
+.table-cell-sale {
+  text-align: end;
+}
+
+.card {
+  margin-bottom:50px;
+  padding-bottom:100px;
+}
+
+#sale-approve-btn:hover {
+  color: #fff!important;
+}
+
+.pending {
+  background-color: #ffa500;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.perfomed {
+  background-color: 9#2e8b57;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.refused {
+  background-color: #9c0000;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+
+}
+
+.data-ceo-card {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  position:absolute; 
+  padding-top:50px;
+  width:70%;
+}
+
+.icon-ceo-card {
+  color:rgba(255,165,0, .2)!important;
+  font-size:100px!important;
+  padding-top:20px!important;
+}
+
+.ceo-cardmenu {
+  cursor: default;
+}
+
+//######################################
+
+.property-item 
+{   
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #fff;
+}
+ 
+.product-container-title > h2
+{
+    color: #004587;
+    font-weight: 700;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card .product-card 
+{
+    min-height: 160px;
+}
+
+.card .card-item
+{
+    height: 100%;
+    box-shadow: none;
+    transition: all .3s ease;
+    transition-delay: 0s;
+    padding: 3px 3px 50px;
+}
+
+.card .product-img
+{
+    padding-top: 10px;
+    height: 190px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.product-img img
+{
+    width: 90%;
+    max-height: 100%;
+    height: auto;
+    margin: auto;
+}
+
+.card-body .card-text
+{
+    color: #444;
+    min-height: 90px;
+    font-size: .875rem;
+    font-weight: 200;
+    font-family: 'Roboto';
+}
+
+.card-body .price-box
+{
+    min-height: 15px;
+    color: #004587;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.price-box p 
+{
+    text-align: center;
+}
+
+.card-body .button-buy-component
+{
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    transition: all .3s ease;
+    transition-delay: 0s;
+    box-sizing: border-box;
+}
+
+.button-buy-component button
+{
+    height: 40px;
+    margin: 0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.property-image {
+  background-position:center;
+  background-size:cover;
+  background-image: url('../../public/assets/images/default.jpg');
+  height: 300px;
+}
