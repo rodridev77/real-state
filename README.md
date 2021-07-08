@@ -20,13 +20,11 @@
 
 ```git clone https://github.com/rodridev77/imobiliaria.git```
 
-3. clone o arquivo .env.example renomeando a cópia para .env, e altere os dados de acesso ao banco de dados para o seu localhost MariaDB.
+3. rode o comando ```composer update``` para atualizar as dependências do projeto.
 
-4. rode o comando ```php artisan generate:key``` para configurar a chave da aplicação.
+4. clone o arquivo .env.example renomeando a cópia para .env, e altere os dados de acesso ao banco de dados para o seu localhost MariaDB.
 
-5. rode o comando ```composer update``` para atualizar as dependências do projeto.
-
-6. rode o comando ```npm install``` para atualizar as dependências do projeto.
+5. rode o comando ```php artisan generate:key``` para configurar a chave da aplicação.
 
 7. instale o dumb do banco que está no arquivo **imobiliaria.sql** na raiz do repositório.
 
