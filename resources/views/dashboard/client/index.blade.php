@@ -37,7 +37,7 @@
                             <td>{{$client->email}}</td>
                             <td>{{$client->address}}</td>
                             <td>
-                                <a class="edit-client opacity-btn" href="{{url('/dashboard/clients/edit', $client->id)}}" style="float:left;" data-id="{{$client->id}}" title="Editar">
+                                <a class="edit-client opacity-btn" href="{{url('/dashboard/clients/'.$client->id.'/edit')}}" style="float:left;" data-id="{{$client->id}}" title="Editar">
                                     <i class="fas fa-edit" style="color:orange;font-size:20px;margin-top:10px"></i>
                                 </a>
     
@@ -72,7 +72,7 @@ $(".delete-client").click(function(event) {
     let _token = $("input[name='_token']").val();
    
     $.ajax({
-        url: "/dashboard/clients/delete",
+        url: "/dashboard/clients/"+client_id,
         type:'DELETE',
         data: {id:client_id, _token:_token},
         success: function(data) {

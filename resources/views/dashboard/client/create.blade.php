@@ -63,7 +63,7 @@ $(function() {
         let _token = $("input[name='_token']").val();
 
         $.ajax({
-            url: "/dashboard/clients/store",
+            url: "/dashboard/clients",
             type:'POST',
             data: {name:name, lastname:lastname, cpf:cpf, phone:phone, address:address, email:email, _token:_token},
             success: function(data) {

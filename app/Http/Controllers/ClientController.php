@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Client;
 use App\Models\User;
 
 class ClientController extends Controller
 {
-    public function index(User $user)
+    public function index()
     {
-        if (!$this->authorize('view_clients', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('view_clients')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         $data = [
@@ -22,19 +23,19 @@ class ClientController extends Controller
         return view("dashboard.client.index", $data);
     }
 
-    public function create(User $user)
+    public function create()
     {
-        if (!$this->authorize('create_clients', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('create_clients')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         return view('dashboard.client.create');
     }
 
-    public function store(Request $request, User $user)
+    public function store(Request $request)
     {
-        if (!$this->authorize('create_clients', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('create_clients')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         try {
@@ -59,10 +60,10 @@ class ClientController extends Controller
         }
     }
 
-    public function edit($id, User $user)
+    public function edit($id)
     {
-        if (!$this->authorize('update_clients', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('update_clients')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         $client = Client::find($id);
@@ -78,10 +79,10 @@ class ClientController extends Controller
         return view('dashboard.client.edit', $data); 
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        if (!$this->authorize('update_clients', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('update_clients')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         try {
@@ -116,23 +117,23 @@ class ClientController extends Controller
         }
     }
 
-    public function delete(Request $request, User $user)
+    public function destroy($id)
     {
-        if (!$this->authorize('delete_clients', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('delete_clients')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         try {
-            $client = Client::find($request->id);
+            $client = Client::find($id);
           
             if (!$client) {
                 return response()->json(["success" => false, "message" => 'Cliente não encontrado.'], 200);
             }
             
             Client::destroy($client->id);
-            return response()->json(["success" => true, "message" => "Deletado com sucesso."], 200);  
+            return response()->json(["success" => true, "message" => "Excluido com sucesso."], 200);  
         } catch(\Exception $e) {
-            return response()->json(["success" => false, "message" => $client->id], 500);
+            return response()->json(["success" => false, "message" => "Whooops, algo deu errado ao excluir."], 500);
         }
     }
 }

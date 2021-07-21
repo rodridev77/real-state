@@ -32,28 +32,9 @@ Route::get( '/home/loadmore', [HomeController::class, 'loadMore']);
 //Dashboard
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
-
-    Route::get('/dashboard/clients', [ClientController::class, 'index']);
-    Route::get('/dashboard/clients/create', [ClientController::class, 'create']);
-    Route::post('/dashboard/clients/store', [ClientController::class, 'store']);
-    Route::delete('/dashboard/clients/delete', [ClientController::class, 'delete']);
-    Route::get('/dashboard/clients/edit/{id}', [ClientController::class, 'edit']);
-    Route::put('/dashboard/clients/update', [ClientController::class, 'update']);
-
-    // Route::get('/dashboard/users', [UserController::class, 'index']);
-    // Route::get('/dashboard/users/create', [UserController::class, 'create']);
-    // Route::post('/dashboard/users/store', [UserController::class, 'store']);
-    // Route::delete('/dashboard/users/delete', [UserController::class, 'delete']);
-    // Route::get('/dashboard/users/edit/{id}', [UserController::class, 'edit']);
-    // Route::put('/dashboard/users/update', [UserController::class, 'update']);
+    Route::resource('/dashboard/clients', ClientController::class);
     Route::resource('/dashboard/users', UserController::class);
-
-    Route::get('/dashboard/properties', [PropertyController::class, 'index']);
-    Route::get('/dashboard/properties/create', [PropertyController::class, 'create']);
-    Route::post('/dashboard/properties/store', [PropertyController::class, 'store']);
-    Route::delete('/dashboard/properties/delete', [PropertyController::class, 'delete']);
-    Route::get('/dashboard/properties/edit/{id}', [PropertyController::class, 'edit']);
-    Route::put('/dashboard/properties/update', [PropertyController::class, 'update']);
+    Route::resource('/dashboard/properties', PropertyController::class);
 
     Route::get('/dashboard/sales', [SaleController::class, 'index']);
     Route::post('/dashboard/sales/store', [SaleController::class, 'store']);
