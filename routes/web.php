@@ -10,6 +10,7 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SearchClientController;
 use App\Http\Controllers\CeoController;
+use App\Http\Controllers\SearchPropertyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,8 @@ use App\Http\Controllers\CeoController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get( 'auth/login', [LoginController::class, 'index'])->name('login');
 Route::post( '/authenticate', [LoginController::class, 'authenticate']);
-Route::get( '/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get( '/search/property', [SearchPropertyController::class, 'search']);
+Route::get( '/home/loadmore', [HomeController::class, 'loadMore']);
 
 //Dashboard
 Route::middleware(['auth'])->group(function () {
@@ -38,12 +40,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/clients/edit/{id}', [ClientController::class, 'edit']);
     Route::put('/dashboard/clients/update', [ClientController::class, 'update']);
 
-    Route::get('/dashboard/users', [UserController::class, 'index']);
-    Route::get('/dashboard/users/create', [UserController::class, 'create']);
-    Route::post('/dashboard/users/store', [UserController::class, 'store']);
-    Route::delete('/dashboard/users/delete', [UserController::class, 'delete']);
-    Route::get('/dashboard/users/edit/{id}', [UserController::class, 'edit']);
-    Route::put('/dashboard/users/update', [UserController::class, 'update']);
+    // Route::get('/dashboard/users', [UserController::class, 'index']);
+    // Route::get('/dashboard/users/create', [UserController::class, 'create']);
+    // Route::post('/dashboard/users/store', [UserController::class, 'store']);
+    // Route::delete('/dashboard/users/delete', [UserController::class, 'delete']);
+    // Route::get('/dashboard/users/edit/{id}', [UserController::class, 'edit']);
+    // Route::put('/dashboard/users/update', [UserController::class, 'update']);
+    Route::resource('/dashboard/users', UserController::class);
 
     Route::get('/dashboard/properties', [PropertyController::class, 'index']);
     Route::get('/dashboard/properties/create', [PropertyController::class, 'create']);
@@ -59,4 +62,5 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/dashboard/properties/approve-sale', [SaleController::class, 'approve']);
 
     Route::get('/dashboard/ceo', [CeoController::class, 'index']);
+    Route::get( '/logout', [LoginController::class, 'logout'])->name('logout');
 });

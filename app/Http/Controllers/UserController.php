@@ -12,10 +12,10 @@ use App\Models\Role;
 
 class UserController extends Controller
 {
-    public function index(User $user)
+    public function index()
     {
-        if (!$this->authorize('view_users', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('view_users')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         $data = [
@@ -25,10 +25,10 @@ class UserController extends Controller
         return view("dashboard.users.index", $data);
     }
 
-    public function create(User $user)
-    {
-        if (!$this->authorize('create_users', Auth::user())) {
-            return view('dashboard.notfound');
+    public function create()
+    {                 
+        if (!Gate::allows('create_users')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         $data['roles'] = $roles = Role::all();
@@ -37,8 +37,8 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        if (!$this->authorize('create_users', Auth::user())) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('create_users')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         try {
@@ -68,10 +68,10 @@ class UserController extends Controller
         }
     }
 
-    public function edit($id, User $user)
+    public function edit($id)
     {
-        if (!$this->authorize('update_users', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('update_users')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
         
         $user = User::find($id);
@@ -87,10 +87,10 @@ class UserController extends Controller
         return view('dashboard.users.edit', $data); 
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        if (!$this->authorize('update_users', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('update_users')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         try {
@@ -125,14 +125,14 @@ class UserController extends Controller
         }
     }
 
-    public function delete(Request $request, User $user)
+    public function destroy($id)
     {
-        if (!$this->authorize('delete_users', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('delete_users')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         try {
-            $user = User::find($request->id);
+            $user = User::find($id);
           
             if (!$user) {
                 return response()->json(["success" => false, "message" => 'Usuário não encontrado.'], 200);

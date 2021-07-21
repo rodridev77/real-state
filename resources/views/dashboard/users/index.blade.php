@@ -37,7 +37,7 @@
                             <td>{{$user->email}}</td>
                             <td>{{$user->address}}</td>
                             <td>
-                                <a class="edit-user opacity-btn" href="{{url('/dashboard/users/edit', $user->id)}}" style="float:left;" data-id="{{$user->id}}" title="Editar">
+                                <a class="edit-user opacity-btn" href="{{url('/dashboard/users/'.$user->id.'/edit')}}" style="float:left;" data-id="{{$user->id}}" title="Editar">
                                     <i class="fas fa-edit" style="color:orange;font-size:20px;margin-top:10px"></i>
                                 </a>
                                 @if (Auth::user()->can('delete_users', Auth::user()))
@@ -73,7 +73,7 @@ $(".delete-user").click(function(event) {
     let _token = $("input[name='_token']").val();
    
     $.ajax({
-        url: "/dashboard/users/delete",
+        url: "/dashboard/users/"+user_id,
         type:'DELETE',
         data: {id:user_id, _token:_token},
         success: function(data) {
