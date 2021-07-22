@@ -216,7 +216,7 @@ $("#btn-create-sale").click(function(event) {
     }
    
     $.ajax({
-        url: "/dashboard/sales/store",
+        url: "/dashboard/sales",
         type:'POST',
         data: {property_price:property_price, property_id:property_id, client_id:client_id, _token:_token},
         success: function(data) {

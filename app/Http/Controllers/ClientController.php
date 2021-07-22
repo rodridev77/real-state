@@ -40,7 +40,7 @@ class ClientController extends Controller
 
         try {
             if (Client::where('email', $request->email)->first()):
-                return response()->json(["success" => false, "message" => 'O e-mail informado já existe.']);  
+                return response()->json(["success" => false, "message" => 'O e-mail informado já existe.'], 200);  
             endif;
             
             $client = [
@@ -54,9 +54,9 @@ class ClientController extends Controller
 
             Client::create($client);
 
-            return response()->json(["success" => true, "message" => "Cadastrado com sucesso"], 200);  
+            return response()->json(["success" => true, "message" => "Cadastrado com sucesso"], 201);  
         } catch(\Exception $e) {
-            return response()->json(["success" => false, "message" => "Houve um erro ao Cadastrar.", "erro"=>$e->getMessage()], 200);
+            return response()->json(["success" => false, "message" => "Whooops, algo deu errado ao excluir."], 500);
         }
     }
 
@@ -69,7 +69,7 @@ class ClientController extends Controller
         $client = Client::find($id);
           
         if (!$client) {
-            return view('dashboard.notfound', ['message' => "Cliente não encontrado!"]);
+            return view('dashboard.notfound', ['message' => "Cliente não encontrado!"], 200);
         }
             
         $data = [
@@ -91,13 +91,13 @@ class ClientController extends Controller
             if ((Client::where('cpf', $request->cpf)->count() > 0)) {
                 $otherClient = Client::where('cpf', $request->cpf)->get()[0];
                 if ($client->id != $otherClient->id)
-                    return response()->json(["success" => false, "message" => "CPF já existe", "id" => $client->id], 200);
+                    return response()->json(["success" => false, "message" => "CPF já existe"], 200);
             } 
 
             if ((Client::where('email', $request->email)->count() > 0)) {
                 $otherClient = Client::where('email', $request->email)->get()[0];
                 if ($client->id != $otherClient->id)
-                    return response()->json(["success" => false, "message" => "Email já existe", "id" => $client->id], 200);
+                    return response()->json(["success" => false, "message" => "Email já existe"], 200);
             } 
             
             $data = [
@@ -113,7 +113,7 @@ class ClientController extends Controller
 
             return response()->json(["success" => true, "message" => "Atualizado com sucesso"], 200);  
         } catch(\Exception $e) {
-            return response()->json(["success" => false, "message" => "Houve um erro ao atualizar.", "error"=>$e->getMessage()], 500);
+            return response()->json(["success" => false, "message" => "Whooops, algo deu errado ao excluir."], 500);
         }
     }
 

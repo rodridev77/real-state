@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Property;
 use App\Models\Address;
 use App\Models\User;
 
 class PropertyController extends Controller
 {
-    public function index(User $user )
+    public function index()
     {
-        if (!$this->authorize('view_properties', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('view_properties')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         $data = [
@@ -22,19 +23,19 @@ class PropertyController extends Controller
         return view("dashboard.property.index", $data);
     }
 
-    public function create(User $user)
+    public function create()
     { 
-        if (!$this->authorize('create_properties', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('create_properties')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         return view('dashboard.property.create');
     }
 
-    public function store(Request $request, User $user)
+    public function store(Request $request)
     {
-        if (!$this->authorize('create_properties', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('create_properties')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         $code = $this->generateCode();
@@ -68,14 +69,14 @@ class PropertyController extends Controller
                 return response()->json(["success" => true, "message" => "Cadastrado com sucesso"], 201);
             }
         } catch(\Exception $e) {
-            return response()->json(["success" => false, "message" => "Houve um erro ao Cadastrar.", "error"=>$data['price']], 200);
+            return response()->json(["success" => false, "message" => "Houve um erro ao Cadastrar.", "error"=>$data['price']], 500);
         }
     }
-// mn
-    public function edit($id, User $user)
+
+    public function edit($id)
     {
-        if (!$this->authorize('update_properties', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('update_properties')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
         
         $property = Property::find($id);
@@ -91,16 +92,16 @@ class PropertyController extends Controller
         return view('dashboard.property.edit', $data); 
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        if (!$this->authorize('update_properties', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('update_properties')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
         
         $property = Property::find($request->id);
 
         if (!$property) {
-            return response()->json(["success" => false, "message" => "Houve um erro ao atualizar", $property], 201);
+            return response()->json(["success" => false, "message" => "Houve um erro ao atualizar", $property], 200);
         }
         
         try {
@@ -135,25 +136,25 @@ class PropertyController extends Controller
                 return response()->json(["success" => true, "message" => "Atualizado com sucesso"], 200);
             }
         } catch(\Exception $e) {
-            return response()->json(["success" => false, "message" => "Houve um erro ao Atualizar.", "erro"=>$e->getMessage()], 200);
+            return response()->json(["success" => false, "message" => "Houve um erro ao Atualizar.", "erro"=>$e->getMessage()], 500);
         }
     }
 
-    public function delete(Request $request, User $user)
+    public function destroy($id)
     {
-        if (!$this->authorize('delete_properties', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('delete_properties')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         try {
-            $property = Property::find($request->id);
+            $property = Property::find($id);
           
             if (!$property) {
                 return response()->json(["success" => false, "message" => 'Imóvel não encontrado.'], 200);
             }
             
             Property::destroy($property->id);
-            return response()->json(["success" => true, "message" => "Deletado com sucesso."], 200);  
+            return response()->json(["success" => true, "message" => "Excluido com sucesso."], 200);  
         } catch(\Exception $e) {
             return response()->json(["success" => false, "message" => "Houve um erro ao excluir"], 500);
         }

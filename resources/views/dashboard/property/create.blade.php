@@ -174,7 +174,7 @@ $(function() {
         let _token = $("input[name='_token']").val();
     
         $.ajax({
-            url: "/dashboard/properties/store",
+            url: "/dashboard/properties",
             type:'POST',
             data: {area:area, bedroom:bedroom, suite:suite, bathroom:bathroom, garage:garage, price:price, 
             description:description, type:type, street:street, number:number, district:district, city:city, _token:_token},

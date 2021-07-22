@@ -70,6 +70,18 @@
                 </div>
 
                 <div class="row box-content-card" style="margin-top:30px">
+                    <div class="col-md-3 card-content-inner">  
+                        <a href="{{url('/dashboard/properties')}}" class="dash-card-link">
+                            <div class="card-link-title">
+                                <div class="area-link">
+                                    <h3>FINANÇAS</h3>
+                                </div>
+                                <div class="page-icon">
+                                    <i class="fa fa-calculator" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                     <div class="col-md-3 card-content-inner">
                         <a href="{{url('/dashboard/ceo')}}" class="dash-card-link">
                             <div class="card-link-title">

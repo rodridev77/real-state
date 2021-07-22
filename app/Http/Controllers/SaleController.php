@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Property;
 use App\Models\Client;
 use App\Models\User;
@@ -10,11 +11,11 @@ use App\Models\Sale;
 
 class SaleController extends Controller
 {
-    public function index(User $user)
+    public function index()
     {
-        /*if (!$this->authorize('view_sales', $user)) {
-            return view('dashboard.notfound');
-        }*/
+        if (!Gate::allows('view_sales')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
+        }
 
         $data = [
             'properties' => Property::paginate(5),
@@ -24,10 +25,10 @@ class SaleController extends Controller
         return view("dashboard.sale.index", $data);
     }
 
-    public function showSail($id, User $user)
+    public function show($id)
     {
-        if (!$this->authorize('view_sales', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('view_sales')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         $property = Property::find($id);
@@ -40,15 +41,15 @@ class SaleController extends Controller
             'property' => $property
         ];
 
-        return view('dashboard.sale.show-sail', $data);
+        return view('dashboard.sale.show', $data);
     }
 
-    public function store(Request $request, User $user)
+    public function store(Request $request)
     {
-        if (!$this->authorize('create_sales', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('create_sales')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
-
+        
         try {
             $sale = Sale::where([['property_id','=',$request->property_id],['client_id','=', $request->client_id]]);
         
@@ -74,14 +75,14 @@ class SaleController extends Controller
 
             return response()->json(["success" => true, "message" => "Venda cadastrada."], 201);
         } catch(\Exception $e) {
-            return response()->json(["success" => false, "message" => "Houve um erro ao Cadastrar.", "error"=>$e->getMessage()], 200);
+            return response()->json(["success" => false, "message" => "Houve um erro ao Cadastrar."], 500);
         }
     }
 
-    public function approve(Request $request, User $user)
+    public function approve(Request $request)
     {
-        if (!$this->authorize('approve_sales', $user)) {
-            return view('dashboard.notfound');
+        if (!Gate::allows('view_sales')) {
+            return view('dashboard.notfound', ["message" => "Usuário não autorizado!"]);
         }
 
         try {
@@ -114,7 +115,7 @@ class SaleController extends Controller
             }*/
   
         } catch(\Exception $e) {
-            return response()->json(["success" => false, "message" => "Houve um erro ao atualizar.", "error"=>$e->getMessage()], 500);
+            return response()->json(["success" => false, "message" => "Houve um erro ao atualizar."], 500);
         }
     }
 }

@@ -36,12 +36,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/dashboard/users', UserController::class);
     Route::resource('/dashboard/properties', PropertyController::class);
 
-    Route::get('/dashboard/sales', [SaleController::class, 'index']);
-    Route::post('/dashboard/sales/store', [SaleController::class, 'store']);
-    Route::get('/dashboard/sales/property/{id}', [SaleController::class, 'showSail']);
-    Route::post('/dashboard/search-client', [SearchClientController::class, 'search']);
     Route::patch('/dashboard/properties/approve-sale', [SaleController::class, 'approve']);
-
+    Route::resource('/dashboard/sales', SaleController::class);
     Route::get('/dashboard/ceo', [CeoController::class, 'index']);
+    Route::post('/dashboard/search-client', [SearchClientController::class, 'search']);
     Route::get( '/logout', [LoginController::class, 'logout'])->name('logout');
 });

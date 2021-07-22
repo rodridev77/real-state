@@ -41,7 +41,7 @@
                             <td>
                                 <div style="display:flex;justify-content:space-between;align-items:center">
                                     
-                                    <a class="edit-user opacity-btn" href="{{url('/dashboard/properties/edit', $property->id)}}" style="float:left;" data-id="{{$property->id}}" title="Editar">
+                                    <a class="edit-user opacity-btn" href="{{url('/dashboard/properties/'.$property->id.'/edit')}}" style="float:left;" data-id="{{$property->id}}" title="Editar">
                                         <i class="fas fa-edit" style="color:orange;font-size:20px;margin-top:10px"></i>
                                     </a>
         
@@ -77,7 +77,7 @@ $(".delete-user").click(function(event) {
     let _token = $("input[name='_token']").val();
    
     $.ajax({
-        url: "/dashboard/properties/delete",
+        url: `/dashboard/properties/${user_id}`,
         type:'DELETE',
         data: {id:user_id, _token:_token},
         success: function(data) {
