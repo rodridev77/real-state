@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $data = [
-            'properties' => Property::paginate(2)
+            'properties' => Property::paginate(5)
         ];
 
         return view("index", $data);

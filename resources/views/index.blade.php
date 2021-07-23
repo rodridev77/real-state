@@ -138,7 +138,7 @@
     </div>
 @endsection
 
-@section('dashboard-script')
+@section('script')
 <script> 
 $(function() {
     $('form[name="search_form"]').submit(function(event) {
@@ -153,7 +153,7 @@ $(function() {
 
         $.ajax({
             url: "/search/property",
-            type:'GET',
+            type:'POST',
             data: {code:code, type:type, bedrooms:bedrooms, city:city, price:price, _token:_token},
             success: function(data) {
                 let icon = 'success';
@@ -264,10 +264,8 @@ function loadProperty2(data) {
                 "</div>"+
             "</div>"+
         "</div>";
-
-    let teste = "<div id='teste'><h1>Teste</h1></div>"
     
-    return teste;
+    return load;
 }
 </script>
 @endsection

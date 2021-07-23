@@ -3,17 +3,17 @@
 <section>
     <div class="container container-page">
         <div class="card" style="position: relative;top:30px;">
-            <div class="card-header" style="display:flex;justify-content:space-between;font-size:16px">
-                <div style="color: orange;font-weight:bold;margin-right:10px">Vendas</div>
-                <div style="display:flex;justify-content:space-between;align-items:center">
+            <div class="card-header">
+                <div class="page-title">Vendas</div>
+                <div class="link-toback">
                     <div class="opacity-btn">
-                        <a href="{{url('/dashboard')}}" style="color:#eb194b;text-decoration: none;font-weight:bold;">
-                            <i class="fa fa-arrow-left" aria-hidden="true" style="margin-top:7px"></i> Painel</a>
+                        <a href="{{url('/dashboard')}}" class="toback-color">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i> Painel</a>
                     </div>
                 </div>
             </div>
             <div class="card-body table-responsive">
-                <table id="data-table" class="table table-striped table-bordered" style="margin-bottom: 10px;">
+                <table id="data-table" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th style="width: 10%;text-align: center;">Código</th>

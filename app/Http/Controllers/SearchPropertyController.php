@@ -3,32 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Services\SearchPropertyService;
+use App\Http\Requests\SearchPropertyRequest;
 use App\Models\User;
 use App\Models\Property;
 
 class SearchPropertyController extends Controller
 {
-    public function search(Request $request)
+    protected $searchService;
+
+    public function __construct(SearchPropertyService $searchService)
     {
-        $property = new Property();
-        $search = $property->newQuery();
+        $this->searchService = $searchService;
+    }
+    
+    public function search(SearchPropertyRequest $searchRequest)
+    {                                 
+        $validated = $searchRequest->validated();
         
-        if ($request->code)
-            $search->where('code', $request->input('code'));
-        if ($request->type)
-            $search->where('type', $request->input('type'));
-        if ($request->bedrooms)
-            $search->where('bedroom', $request->input('bedrooms'));
-        if ($request->price)
-            $search->where('price', $request->input('price'));
-        if ($request->city) {
-            $search->whereHas('address.property', function($query) use ($request) {
-                $query->where('city', $request->input('city'));
-            });
+        if ($validated) {
+            $data = $this->searchService->search($searchRequest);
+            return response()->json(["success" => true, "result" => $data], 200);
         }
-        
-        $data = $search->with('address')->get();
-        
-        return response()->json(["success" => true, "result" => $data], 200);
+        return response()->json(["success" => true, "result" => ""], 200);
     }
 }

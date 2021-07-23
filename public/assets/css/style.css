@@ -3799,6 +3799,7 @@ tbody.collapse.show {
 
 .card {
   position: relative;
+  top:30px;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -3847,6 +3848,9 @@ tbody.collapse.show {
 }
 
 .card-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
@@ -3858,6 +3862,43 @@ tbody.collapse.show {
 .card-header + .list-group .list-group-item:first-child {
   border-top: 0;
 }
+
+.page-title {
+  color: orange;
+  font-weight: bold;
+  margin-right: 10px
+}
+
+.link-toback {
+  display: flex;
+  justify-content: space-between;
+  align-items: center"
+}
+
+.toback-color {
+  color:#eb194b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.fa .fa-arrow-left {
+  margin-top:7px;
+}
+
+.btn-newdata, .btn-toback {
+  text-decoration: none!important;
+  font-weight: bold!important;
+}
+
+#data-table {
+  margin-bottom: 10px;
+}
+
+.fa-edit {
+  color: orange;
+  font-size: 20px;
+  margin-top: 10px;
+} 
 
 .card-footer {
   padding: 0.75rem 1.25rem;

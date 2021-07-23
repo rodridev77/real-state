@@ -26,7 +26,7 @@ use App\Http\Controllers\SearchPropertyController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get( 'auth/login', [LoginController::class, 'index'])->name('login');
 Route::post( '/authenticate', [LoginController::class, 'authenticate']);
-Route::get( '/search/property', [SearchPropertyController::class, 'search']);
+Route::post( '/search/property', [SearchPropertyController::class, 'search']);
 Route::get( '/home/loadmore', [HomeController::class, 'loadMore']);
 
 //Dashboard
